@@ -1,0 +1,52 @@
+<div class="container">
+  <nav>
+    <div>
+    <div id="barra">
+    <ul>
+      <li><a href="/ask">Ask a question</a></li>
+      <li><a href="/logout">Log out</a></li>
+    </ul>
+    <br clear="all">
+    </div>
+    </div>  
+  </nav>
+
+  <%unless @all_questions == []%>
+    <% @all_questions.each do |question| %>
+      <div id="question_content">
+        <b>Question made by: <%user = User.find(question.users_id)%>
+        <%if user == nil%>
+          <span>Couldn't find user</span></b><br>
+        <%else%>
+          <%=user.name%></b><br>
+        <%end%>
+        <%= question.title %><br><br>
+        <%= question.description%><br><br>
+        <b>Votes: </b>
+.       <span id="change_votes"><%=question.votes%></span><br><a class="upvote" href="/upvote/<%=question.id%>">Upvote</a><br>
+        <%answer = Answer.where(questions_id: question.id)%>
+        <%if answer.empty?%>
+          <br><b>Answers:</b><br>
+          <p>No answers to show yet</p>
+        <%else%>
+          <% answer.each do |ans| %>
+            <br><b>Answers:</b><br>
+            <%= ans.description %><br>
+            <%user = User.find(ans.users_id)%>
+            <b style="font-size: 10px">Answer made by: <%=user.name%></b>
+          <%end%>
+        <%end%>
+        <form action="/answer" method="post">
+          <br><b>Answer this question:</b><br>
+          <textarea rows="5" cols="20" name="answer_description" placeholder="Answer here."></textarea><br>
+          <input type="hidden" name="question_id" value="<%=question.id%>">
+          <input type="submit" value="Answer">
+        </form>
+      </div>
+  <%end%>
+  <%else%>
+    <div id="question_content">
+    <p>For the moment there are no questions to show. Come back again later.</p>
+    </div>
+  <%end%>
+</div>

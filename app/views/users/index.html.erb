@@ -1,0 +1,26 @@
+ <%= image_tag("quora_logo.png", id: "quora_logo") %>
+ <% if @bulean %>
+  <p style="color:green, text-align: center">Usuario registrado</p>
+  <% @bulean = false %>
+  <%end %>
+   <% if @bulean2 %>
+  <p style="color:red">Logout Efectuado</p>
+  <% @bulean2 = false %>
+  <%end %>
+  <%= @error_message %>
+ <div id="login_credentials">
+   <b style="color:#990000">Inicia Sesión o Regístrate para continuar...</b><br><br>
+   <form action="/register" method="post">
+    <b style="color:#990000">Registro.</b><br><br>
+    <input type="text" name="name" placeholder="Nombre"><br>
+    <input type="text" name="email" placeholder="Email"><br>
+    <input type="password" name="password" placeholder="Contraseña"><br><br>
+    <input type="submit" name="register" value="Register"><br><br>
+  </form>
+  <form action="/login" method="post">  
+    <b style="color:#990000">Inicia Sesión.</b><br><br>
+    <input type="text" name="email" placeholder="Email"><br>
+    <input type="password" name="password" placeholder="Contraseña"><br><br>
+    <input type="submit" name="login" value="Log in"><br><br>
+  </form>
+ </div>
