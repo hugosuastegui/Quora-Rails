@@ -65,7 +65,7 @@ Rails.application.routes.draw do
 
   post "/login" => "users#login"
   post "/register" => "users#register"
-  post "/logout" => "users#logout"
+  get "/logout" => "users#logout"
 
   get "/questions" => "questions#index"
   post "create_question" => "questions#create"
